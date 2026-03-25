@@ -1,0 +1,5 @@
+---
+- name: Remove Node Exporter work directory
+  ansible.builtin.file:
+    path: "{{ node_exporter_work_dir }}"
+    state: absent

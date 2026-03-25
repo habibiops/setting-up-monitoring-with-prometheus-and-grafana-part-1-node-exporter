@@ -1,0 +1,27 @@
+---
+# preparation variables, used in prepare.yml
+node_exporter_user: "node_exporter"
+node_exporter_group: "node_exporter"
+node_exporter_work_dir: "/tmp/node_exporter"
+
+# installation variables, used in install.yml
+node_exporter_version: "1.10.2"
+node_exporter_service_name: "node_exporter"
+node_exporter_arch: "linux-amd64"
+node_exporter_checksum: "sha256:c46e5b6f53948477ff3a19d97c58307394a29fe64a01905646f026ddc32cb65b"
+
+node_exporter_archive_name: "node_exporter-{{ node_exporter_version }}.{{ node_exporter_arch }}.tar.gz"
+node_exporter_release_url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/{{ node_exporter_archive_name }}"
+node_exporter_archive_path: "{{ node_exporter_work_dir }}/{{ node_exporter_archive_name }}"
+
+node_exporter_extracted_name: "node_exporter-{{ node_exporter_version }}.{{ node_exporter_arch }}"
+node_exporter_extracted_dir_path: "{{ node_exporter_work_dir }}/{{ node_exporter_extracted_name }}"
+node_exporter_extracted_bin_path: "{{ node_exporter_extracted_dir_path }}/node_exporter"
+
+node_exporter_bin_path: "/usr/local/bin/node_exporter"
+
+# configuration variables, used in configure.yml
+node_exporter_unit_path: "/etc/systemd/system/{{ node_exporter_service_name }}.service"
+
+node_exporter_port: 9100
+node_exporter_listen_address: "{{ internal_ip }}:{{ node_exporter_port }}"

@@ -1,0 +1,12 @@
+---
+- name: Prepare node_exporter resources
+  ansible.builtin.import_tasks: prepare.yml
+
+- name: Install node_exporter binary
+  ansible.builtin.import_tasks: install.yml
+
+- name: Configure node_exporter service
+  ansible.builtin.import_tasks: configure.yml
+
+- name: Clean up node_exporter work files
+  ansible.builtin.import_tasks: cleanup.yml

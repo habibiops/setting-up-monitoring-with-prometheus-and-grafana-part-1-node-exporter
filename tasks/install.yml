@@ -1,0 +1,22 @@
+---
+- name: Get Node Exporter release
+  ansible.builtin.get_url:
+    url: "{{ node_exporter_release_url }}"
+    dest: "{{ node_exporter_archive_path }}"
+    mode: "0644"
+    checksum: "{{ node_exporter_checksum }}"
+
+- name: Unarchive Node Exporter
+  ansible.builtin.unarchive:
+    src: "{{ node_exporter_archive_path }}"
+    dest: "{{ node_exporter_work_dir }}"
+    remote_src: true
+
+- name: Install the Node Exporter binary
+  ansible.builtin.copy:
+    src: "{{ node_exporter_extracted_bin_path }}"
+    dest: "{{ node_exporter_bin_path }}"
+    remote_src: true
+    mode: "0755"
+
+  notify: Restart node_exporter
